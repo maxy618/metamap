@@ -1,55 +1,97 @@
 # MetaMap 📍
 
-A simple Python utility for extracting GPS coordinates from image EXIF metadata and generating a Google Maps link.
+A simple Python utility for extracting GPS coordinates from image EXIF metadata, displaying full EXIF tags for a single image, and generating Google Maps links.
 
 ---
 
 ## Features
 
-* Extracts GPS coordinates (latitude and longitude) from image EXIF metadata
-* Converts DMS (degrees, minutes, seconds) format to decimal
-* Generates a direct Google Maps link for the location
-* Colorful console output using `termcolor`
-* ASCII logo on startup
-
----
-
-## Example
-
-```bash
-python metamap.py path/to/image.jpg
-```
-
-Example output:
-
-```
-[+] Found coordinates: Latitude: 23.7558, Longitude: 45.6173
-[+] Google maps: https://www.google.com/maps?q=23.7558,45.6173
-```
+* **GPS Extraction:** Extracts GPS coordinates (latitude and longitude) from image EXIF metadata.
+* **DMS to Decimal:** Converts DMS (degrees, minutes, seconds) format to decimal.
+* **Google Maps Link:** Generates a direct Google Maps link for the extracted location.
+* **Full EXIF Dump:** When using the `--full` flag with a single image, prints all available EXIF tags in a readable, sorted list.
+* **Batch Processing:** Process multiple images at once; coordinates are grouped by unique location, and files without GPS data are listed separately.
+* **Colorful Console Output:** Uses `termcolor` for color-coded log messages (`info`, `success`, `warning`, `error`).
+* **ASCII Logo:** Displays an ASCII art logo on startup.
 
 ---
 
 ## Installation
 
-1. Clone the repository:
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/yourusername/metamap.git
+   cd metamap
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+---
+
+## Usage
 
 ```bash
-git clone https://github.com/yourusername/metamap.git
-cd metamap
+python metamap.py [image_paths...] [--full]
 ```
 
-2. Install the required Python packages:
+* `image_paths`: One or more paths to image files (separated by spaces).
+* `--full`: Optional flag. When provided, prints all EXIF metadata **only if exactly one** image path is given. If used with multiple images, the program will exit with an error.
 
-```bash
-pip install -r requirements.txt
-```
+### Examples
+
+* **Extract GPS from a single image:**
+
+  ```bash
+  python metamap.py photo1.jpg
+  ```
+
+  Output:
+
+  ```
+  [+] Unique GPS coordinates found:
+  [i] Coordinates: 48.8584, 2.2945
+  [i] Google Maps: https://www.google.com/maps?q=48.8584,2.2945
+  ```
+
+* **Full EXIF for one image:**
+
+  ```bash
+  python metamap.py photo1.jpg --full
+  ```
+
+  Output:
+
+  ```
+  [i] EXIF metadata for photo1.jpg:
+    ApertureValue: 2.8
+    DateTimeOriginal: 2025-05-10 14:23:11
+    GPSLatitude: (48, 51, 29.04)
+    GPSLatitudeRef: N
+    GPSLongitude: (2, 17, 39.6)
+    GPSLongitudeRef: E
+    ...
+  ```
+
+* **Batch processing multiple images:**
+
+  ```bash
+  python metamap.py img1.jpg img2.jpg img3.jpg
+  ```
+
+  * Groups images by identical coordinates
+  * Lists files without GPS data separately
 
 ---
 
 ## Requirements
 
-* Python 3.8+
-* Packages listed in `requirements.txt`:
+* **Python:** 3.8 or higher
+* **Dependencies:** Listed in `requirements.txt`:
 
   * `exif`
   * `termcolor`
@@ -58,7 +100,13 @@ pip install -r requirements.txt
 
 ## How It Works
 
-The program reads the EXIF metadata of an image, extracts GPS coordinates (if available), converts them to decimal format, and generates a direct Google Maps link for the location.
+1. **Load EXIF:** Opens each image in binary mode and reads EXIF metadata using the `exif` library.
+2. **GPS Parsing:** Safely retrieves GPS tags (latitude, longitude, and their references) via `getattr`, avoiding errors if tags are missing.
+3. **Conversion:** Converts DMS tuples into decimal degrees, applying negative signs for S/W references.
+4. **Output:**
+
+   * If `--full` is provided for a single image, lists all EXIF tags (sorted alphabetically).
+   * Otherwise, aggregates GPS coordinates across images, prints unique locations with Google Maps links, and reports files without GPS data.
 
 ---
 
