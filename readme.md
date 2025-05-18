@@ -11,8 +11,6 @@ A simple Python utility for extracting GPS coordinates from image EXIF metadata,
 * **Google Maps Link:** Generates a direct Google Maps link for the extracted location.
 * **Full EXIF Dump:** When using the `--full` flag with a single image, prints all available EXIF tags in a readable, sorted list.
 * **Batch Processing:** Process multiple images at once; coordinates are grouped by unique location, and files without GPS data are listed separately.
-* **Colorful Console Output:** Uses `termcolor` for color-coded log messages (`info`, `success`, `warning`, `error`).
-* **ASCII Logo:** Displays an ASCII art logo on startup.
 
 ---
 
