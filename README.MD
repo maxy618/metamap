@@ -19,7 +19,7 @@ A simple Python utility for extracting GPS coordinates from image EXIF metadata,
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/metamap.git
+   git clone https://github.com/maxy618/metamap.git
    cd metamap
    ```
 
