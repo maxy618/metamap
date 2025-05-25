@@ -1,6 +1,6 @@
 import os
+import sys
 import argparse
-from sys import exit
 
 from termcolor import colored
 from exif import Image
@@ -115,7 +115,7 @@ def main():
     display_logo()
     if args.full and len(args.image_paths) != 1:
         console_log('error', "The --full option can only be used with exactly one image.")
-        exit(1)
+        sys.exit(1)
 
     coords_to_files = {}
     files_without_coords = []
