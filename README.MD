@@ -2,6 +2,14 @@
 
 A simple Python utility for extracting GPS coordinates from image EXIF metadata, displaying full EXIF tags for a single image, and generating Google Maps links.
 
+```
+                __                                
+  _____   _____/  |______    _____ _____  ______  
+ /     \_/ __ \   __\__  \  /     \\__  \ \____ \ 
+|  Y Y  \  ___/|  |  / __ \|  Y Y  \/ __ \|  |_> >
+|__|_|  /\___  >__| (____  /__|_|  (____  /   __/ 
+      \/     \/          \/      \/     \/|__|    
+```
 ---
 
 ## Features
