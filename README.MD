@@ -1,4 +1,4 @@
-# MetaMap 📍
+# MetaMap
 
 A simple Python utility for extracting GPS coordinates from image EXIF metadata, displaying full EXIF tags for a single image, and generating Google Maps links.
 
